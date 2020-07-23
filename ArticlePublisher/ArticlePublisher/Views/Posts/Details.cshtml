@@ -1,0 +1,46 @@
+﻿@model ArticlePublisher.Models.Post
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Post Details</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">@Model.PostName</h1>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title text-black-50 ">@Model.PostDescription</h5>
+                <div class="card-text">
+                    @Html.Raw(Model.Content)
+                </div>
+                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a> |
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+            <div class="card-footer text-muted">
+                @Model.TimeStamp
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+var disqus_config = function () {
+    this.page.url = "https://localhost:44326/Posts/Details/"+@Model.Id;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = @Model.Id; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://articlepublisher.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
